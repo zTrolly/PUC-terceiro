@@ -1,6 +1,7 @@
 /**
- * declaracao default do trabalho1
+ * declaracao default de classe e seus metodos para o trabalho 1
  * @author Breno Lopes
+ * Matrícula: 725777
  */
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,7 +11,7 @@ import java.io.DataOutputStream;
 import java.text.DecimalFormat;
 
 //------------------------------FIM IMPORT---------------------------------//t
-class Clube{
+class Clube {
   private int idClube;
   private String nome;
   private String cnpj;
@@ -18,13 +19,13 @@ class Clube{
   private int partidasJogadas;
   private int pontos;
 
-  public Clube(int idClube, String nome, String cnpj, String cidade, int partidasJogadas, int pontos){
-    this.idClube = idClube;
-    this.nome = nome;
-    this.cnpj = cnpj;
-    this.cidade = cidade;
-    this.partidasJogadas = partidasJogadas;
-    this.pontos = pontos;
+  public Clube(int _idClube, String _nome, String _cnpj, String _cidade, int _partidasJogadas, int _pontos){
+    this.idClube = _idClube;
+    this.nome = _nome;
+    this.cnpj = _cnpj;
+    this.cidade = _cidade;
+    this.partidasJogadas = _partidasJogadas;
+    this.pontos = _pontos;
   }
 
   public Clube(){
@@ -45,17 +46,69 @@ class Clube{
   public int getPontos(){return this.pontos;}
 
   //SETS
-  public void setIdClube(int idClube){this.idClube = idClube;}
-  public void setNome(String nome){this.nome = nome;}
-  public void setCnpj(String cnpj){this.cnpj = cnpj;}
-  public void setCidade(String cidade){this.cidade = cidade;}
-  public void setPartidasJogadas(int partidasJogadas){this.partidasJogadas = partidasJogadas;}
-  public void setPontos(int pontos){this.pontos = pontos;}
+  public void setIdClube(int _idClube){this.idClube = _idClube;}
+  public void setNome(String _nome){this.nome = _nome;}
+  public void setCnpj(String _cnpj){this.cnpj = _cnpj;}
+  public void setCidade(String _cidade){this.cidade = _cidade;}
+  public void setPartidasJogadas(int _partidasJogadas){this.partidasJogadas = _partidasJogadas;}
+  public void setPontos(int _pontos){this.pontos = _pontos;}
 
-public void partidas(Clube clube1, Clube clube2){
-  clube1.setPartidasJogadas(clube1.getPartidasJogadas()+1);
-  clube2.setPartidasJogadas(clube2.getPartidasJogadas()+1);
+
+
+  /** 
+   * metodo que verifica o nome dos dois times e atualiza os dados referentes ao número de partidasJogadas e pontos
+   * @param golsClube1 @param golsClube2 , variaveis para determinar o número de gols de cada time
+  */
+  
+  public void partida(Clube clube1, Clube clube2, int golsClube1, int golsClube2){
+    clube1.setPartidasJogadas(clube1.getPartidasJogadas()+1);
+    clube2.setPartidasJogadas(clube2.getPartidasJogadas()+1);
+
+    /*
+      *verificação dos números de gols para determinar o ganhador ou se empatou
+    */
+    if(golsClube1 > golsClube2){
+      clube1.setPontos(clube1.getPontos() + 3);
+    }else if(golsClube2 > golsClube1){
+      clube2.setPontos(clube2.getPontos() + 3);
+    }else if(golsClube1 == golsClube2){
+      clube1.setPontos(clube1.getPontos() + 1);
+      clube2.setPontos(clube2.getPontos() + 1);
+    }
+  }
+
 }
 
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+TODO
+-----------------
+■ Criar um clube -> essa escolha deve, a partir da leitura dos dados do clube pelo
+terminal (nome, cnpj, estado), criar um novo clube no arquivo (partidasJogadas
+e pontos devem ser iniciados com 0). ✅
+
+■ Realizar uma partida -> essa escolha deve atualizar dados em dois clubes no
+arquivo.
+  TODO
+  ● Para isso, é necessário permitir ao usuário cadastrar uma partida, ou seja, informar o nome de dois times
+   quantos gols fizeram.✅
+   Cabe ao método criado definir o ganhador ou se foi empate.✅
+   Caso tenha vencedor,deve-se somar 3 pontos para esse.✅
+   Caso seja empate, deve-se somar 1 ponto para cada clube.✅
+  Então, o programa deve atualizar o campo pontos e o campo partidasJogadas (em +1) dos dois clubes.✅
+
+*/
