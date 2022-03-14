@@ -11,7 +11,7 @@ import java.io.DataOutputStream;
 import java.text.DecimalFormat;
 
 //------------------------------FIM IMPORT---------------------------------//t
-class Clube {
+class Clube extends Menu{
   private int idClube;
   private String nome;
   private String cnpj;
@@ -52,6 +52,14 @@ class Clube {
   public void setCidade(String _cidade){this.cidade = _cidade;}
   public void setPartidasJogadas(int _partidasJogadas){this.partidasJogadas = _partidasJogadas;}
   public void setPontos(int _pontos){this.pontos = _pontos;}
+
+
+
+// criar clube 
+public void criarClube(String nomeDoClube, String cnpj, String cidade){
+
+}
+
 
 
 
