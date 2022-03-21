@@ -33,8 +33,7 @@ class Partida  extends Clube{
   public void criar(String nomeClube1, String nomeClube2, byte golsClube1, byte golsClube2){
     //chamr metodo de pesquisa para alterar os dados dos times passados no metodo de cima
 
-    //Clube clube1 = new Clube();
-    //Clube clube2 = new Clube();
+    
 
     
 
