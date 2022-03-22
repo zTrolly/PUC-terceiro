@@ -6,11 +6,7 @@ int main()
     float b = a-0.2;
     float c = 0.2;
     float d = c - 0.2;
-
-    printf("a -> %d\n",a); 
-    printf("b -> %f\n",b); 
-    printf("c -> %f\n",c); 
-    printf("d -> %f\n",d); 
+    
     if (a<=0.2) 
     printf("menor ou igual"); 
     else 
