@@ -3,11 +3,11 @@
 int main() 
 { 
     double a = 0.4*3.0 - 1.0;
-    float b = a-0.2;
+    float b = a-0.2F;
     float c = 0.2;
-    float d = c - 0.2;
-    
-    if (a<=0.2) 
+    float d = c - 0.2F;
+
+    if (a<=0.2F) 
     printf("menor ou igual"); 
     else 
     printf("Ups! maior ou diferente"); 
