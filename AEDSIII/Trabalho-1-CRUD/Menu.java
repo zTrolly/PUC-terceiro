@@ -17,7 +17,7 @@ public class Menu{
 		System.out.println("| Opção 3 - Editar um Clube                 |");
 		System.out.println("| Opção 4 - Remover um Clube                |");
 		System.out.println("| Opção 5 - Criar uma Partida               |");
-		System.out.println("| Opção 6 - Sair                            |");
+		System.out.println("| Opção 99 - Sair                            |");
 		System.out.println("|-------------------------------------------|");
     System.out.println("Digite a opção desejada");
   }
