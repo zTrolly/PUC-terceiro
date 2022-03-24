@@ -1,4 +1,26 @@
-public class Menu{
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.Scanner;
+
+public class Menu extends Clube{
+  
+
+  /**
+     * Faz a leitura do último ID utilizado pra ser incrementeado no main
+     */
+    public static int ultimoId(int id) {
+      RandomAccessFile arquivo;
+      int ultimoId;
+      try {
+          arquivo = new RandomAccessFile("clubes.db", "rw");
+          ultimoId = arquivo.readInt();
+          arquivo.close();
+          return ultimoId;
+      } catch(IOException e) {
+          System.out.println("Erro em ler id");
+          return id;
+      }
+    }
   //Metodo para limpar o terminal
   public static void limpatela() { 
     System.out.println("\u000c");
@@ -23,10 +45,29 @@ public class Menu{
   }
   //Cabecalho da opção 1 
   public static void op1(){
+    Scanner sc = new Scanner(System.in);
+    String nome;
+    String cnpj;
+    String cidade;
+
     Menu.limpatela();
     System.out.println("+-------------------------------------------+");
 		System.out.println("|        Criar um Clube                     |");
 		System.out.println("+-------------------------------------------+");
+   
+    int id = -1;
+    id = ultimoId(id);
+    id++;
+
+    sc.nextLine();
+    System.out.print("Digite o nome do Clube ->");
+    nome = sc.nextLine();
+    System.out.print("Digite o CNPJ do clube ->");
+    cnpj = sc.nextLine();
+    System.out.print("Digite a cidade do clube ->");
+    cidade = sc.nextLine();
+    Clube novoClube = new Clube((byte) id, nome, cnpj, cidade, 0, 0);
+    //fazer o metodo para salvar em byte arary
   }
 
   //Cabecalho da opção 2
@@ -35,6 +76,7 @@ public class Menu{
     System.out.println("+-------------------------------------------+");
 		System.out.println("|        Lista de Clubes                    |");
 		System.out.println("+-------------------------------------------+");
+
   }
 
   //Cabecalho da opção 3

@@ -7,17 +7,18 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.io.DataOutputStream;
 import java.text.DecimalFormat;
 
 //------------------------------FIM IMPORT---------------------------------//t
-class Clube extends Menu{
-  private int idClube;
-  private String nome;
-  private String cnpj;
-  private String cidade;
-  private int partidasJogadas;
-  private int pontos;
+class Clube{
+  protected int idClube;
+  protected String nome;
+  protected String cnpj;
+  protected String cidade;
+  protected int partidasJogadas;
+  protected int pontos;
 
   public Clube(int _idClube, String _nome, String _cnpj, String _cidade, int _partidasJogadas, int _pontos){
     this.idClube = _idClube;
@@ -55,14 +56,7 @@ class Clube extends Menu{
 
 
 
-// criar clube 
-public void criarClube(String nomeDoClube, String cnpj, String cidade){
-
-}
-
-
-
-
+  
   /** 
    * metodo que verifica o nome dos dois times e atualiza os dados referentes ao número de partidasJogadas e pontos
    * @param golsClube1 @param golsClube2 , variaveis para determinar o número de gols de cada time
