@@ -30,7 +30,7 @@ public void C (Clube clubeUsuario, int id){
     data = clubeUsuario.toByteArray();
     arq.seek(0);
     arq.write(id);
-    arq.seek(arq.length());
+    arq.seek(arq.length() + 1);
     arq.writeChar(' ');
     arq.writeInt(data.length);
     arq.write(data);
