@@ -14,7 +14,7 @@ public class Main {
 			opcao = leitor.nextByte();
        switch (opcao){
           case 1:
-           Menu.op1(); // chamada do cabecalho
+           Menu.op1();
           break;
 
           case 2:

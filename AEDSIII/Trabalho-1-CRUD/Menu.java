@@ -3,7 +3,6 @@ import java.io.RandomAccessFile;
 import java.util.Scanner;
 
 public class Menu extends Clube{
-  
 
   /**
      * Faz a leitura do último ID utilizado pra ser incrementeado no main
@@ -45,6 +44,7 @@ public class Menu extends Clube{
   }
   //Cabecalho da opção 1 
   public static void op1(){
+    CRUD crud = new CRUD();
     Scanner sc = new Scanner(System.in);
     String nome;
     String cnpj;
@@ -58,7 +58,7 @@ public class Menu extends Clube{
     int id = -1;
     id = ultimoId(id);
     id++;
-
+    System.out.println("Aperte qualquer tecla para iniciar...");
     sc.nextLine();
     System.out.print("Digite o nome do Clube ->");
     nome = sc.nextLine();
@@ -67,8 +67,8 @@ public class Menu extends Clube{
     System.out.print("Digite a cidade do clube ->");
     cidade = sc.nextLine();
     Clube novoClube = new Clube((byte) id, nome, cnpj, cidade, 0, 0);
-    //fazer o metodo para salvar em byte arary
-  }
+    crud.C(novoClube, id);
+    }
 
   //Cabecalho da opção 2
   public static void op2(){

@@ -23,9 +23,8 @@ public class CRUD {
 /**
  * Método para criaçõo de um Clube
  */
-public void C(Clube clubeUsuario, int id){
+public void C (Clube clubeUsuario, int id){
   byte[] data;
-
   try {
     arq = new RandomAccessFile(nomeDoArquivo, "rw");
     data = clubeUsuario.toByteArray();
@@ -36,7 +35,6 @@ public void C(Clube clubeUsuario, int id){
     arq.writeInt(data.length);
     arq.write(data);
     arq.close();
-    //System.out.println("passei aqui");
   }catch(IOException e){System.out.println(e.getMessage() + "erro de inserção");}
 }
 }
