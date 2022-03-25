@@ -55,7 +55,28 @@ class Clube{
   public void setPontos(int _pontos){this.pontos = _pontos;}
 
 
+  public byte[] toByteArray() throws IOException {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    DataOutputStream dos = new DataOutputStream(baos);
+    dos.write(idClube);
+    dos.writeUTF(nome);
+    dos.writeUTF(cnpj);
+    dos.writeUTF(cidade);
+    dos.write(partidasJogadas);
+    dos.write(pontos);
+    return baos.toByteArray();
+}
 
+public void fromByteArray(byte[] ba) throws IOException {
+    ByteArrayInputStream bais = new ByteArrayInputStream(ba);
+    DataInputStream dis = new DataInputStream(bais);
+    idClube = dis.readByte();
+    nome = dis.readUTF();
+    cnpj = dis.readUTF();
+    cidade = dis.readUTF();
+    partidasJogadas = dis.readByte();
+    pontos = dis.readByte();
+}
   
   /** 
    * metodo que verifica o nome dos dois times e atualiza os dados referentes ao número de partidasJogadas e pontos
