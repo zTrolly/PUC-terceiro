@@ -75,6 +75,10 @@ public void fromByteArray(byte[] ba) throws IOException {
     partidasJogadas = dis.readByte();
     pontos = dis.readByte();
 }
+
+public String stringfy() {
+  return "\nID: " + idClube + "\nNome clube: " + nome + "\nCNPJ: " + cnpj + "\nCidade: " + cidade + "\nPartidas jogadas: " + partidasJogadas + "\nPontos acumulados: " + pontos;
+}
   
   /** 
    * metodo que verifica o nome dos dois times e atualiza os dados referentes ao número de partidasJogadas e pontos

@@ -3,20 +3,21 @@ import java.io.RandomAccessFile;
 import java.util.Scanner;
 
 public class Menu extends Clube{
-
-    public static int ultimoId(int id) {
-      RandomAccessFile arquivo;
-      int ultimoId;
-      try {
-          arquivo = new RandomAccessFile("clubes.db", "rw");
-          ultimoId = arquivo.readInt();
-          arquivo.close();
-          return ultimoId;
-      } catch(IOException e) {
-          System.out.println("Erro em ler id");
-          return id;
-      }
+  public static int ultimoId(int id) {
+    RandomAccessFile arquivo;
+    int ultimoId;
+    try {
+        arquivo = new RandomAccessFile("clubes.db", "rw");
+        ultimoId = arquivo.readInt();
+        arquivo.close();
+        return ultimoId;
+    } catch(IOException e) {
+        System.out.println("Erro em ler id");
+        return id;
     }
+  }
+
+    
   //Metodo para limpar o terminal
   public static void limpatela() { 
     System.out.println("\u000c");
@@ -40,7 +41,8 @@ public class Menu extends Clube{
     System.out.println("Digite a opção desejada");
   }
   //Cabecalho da opção 1 
-  public static void op1(){
+  public static void op1(int id){
+    id = ultimoId(id);
       CRUD crud = new CRUD();
       Scanner scannerOp1 = new Scanner(System.in);
       String nome;
@@ -51,19 +53,25 @@ public class Menu extends Clube{
       System.out.println("+-------------------------------------------+");
       System.out.println("|        Criar um Clube                     |");
       System.out.println("+-------------------------------------------+");
-      int id = -1;
-      id = ultimoId(id);
-      id++;
+      
+
       System.out.println("Aperte Enter para iniciar...");
       scannerOp1.nextLine();
+
       System.out.print("Digite o nome do Clube ->");
       nome = scannerOp1.nextLine();
+      
       System.out.print("Digite o CNPJ do clube ->");
       cnpj = scannerOp1.nextLine();
+
       System.out.print("Digite a cidade do clube ->");
       cidade = scannerOp1.nextLine();
+
+      System.out.println(id);
+      id++;
       Clube novoClube = new Clube((byte) id, nome, cnpj, cidade, 0, 0);
       crud.C(novoClube, id);
+
       System.out.println("Clube criado com sucesso!!! O Id do seu clube é " + id);
       System.out.println("Aperte Enter para voltar para o menu...");
       scannerOp1.nextLine();
@@ -77,7 +85,8 @@ public class Menu extends Clube{
     System.out.println("+-------------------------------------------+");
 		System.out.println("|        Lista de Clubes                    |");
 		System.out.println("+-------------------------------------------+");
-
+    CRUD crud = new CRUD();
+    crud.R();
   }
 
   //Cabecalho da opção 3
@@ -86,6 +95,7 @@ public class Menu extends Clube{
     System.out.println("+-------------------------------------------+");
 		System.out.println("|        Editar um Clube                    |");
 		System.out.println("+-------------------------------------------+");
+
   }
 
   //Cabecalho da opção 4
