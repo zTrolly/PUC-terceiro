@@ -1,11 +1,11 @@
-import java.io.IOException;
-import java.io.RandomAccessFile;
+/**
+  * Main que faz a gestão de chamadas de opções
+  * @author Breno Lopes
+  * Matrícula: 725777
+ */
 import java.util.Scanner;
 
 public class Main {
-  
-  
-
   public static void main(String[] args) throws Exception{
     byte opcao = 50;
 		Scanner leitor = new Scanner(System.in);

@@ -1,3 +1,9 @@
+/**
+ * Classe CRUD para fazer as alterações no arquivo clubes.db
+ * @author Breno Lopes
+ * Matrícula: 725777
+ */
+
 import java.io.*;
 public class CRUD {
    private final String nomeDoArquivo = "clubes.db";
@@ -22,7 +28,7 @@ public class CRUD {
 
 //CREATE
 /**
- * Método para criaçõo de um Clube
+ * Método para criaçõo de um Clube utilizando o id passado pelo Menu.op1()
  */
   public void C (Clube clubeUsuario, int id){
     byte[] data;
@@ -32,7 +38,7 @@ public class CRUD {
       arq.seek(0);
       arq.writeInt(id);
       arq.seek(arq.length());
-      arq.writeChar(' ');
+      arq.writeChar(' '); // lapide
       arq.writeInt(data.length);
       arq.write(data);
       arq.close();
@@ -40,7 +46,9 @@ public class CRUD {
   }
 
 
-  //READ
+  /**
+   * Vai fazer toda a leitura do arquvio e vai pular o cabecalho
+   */
   public void R() {
     try {
         arq = new RandomAccessFile(nomeDoArquivo, "rw");
@@ -67,7 +75,12 @@ public class CRUD {
     }
   }
 
-  //UPDATE
+  /**
+   * Recebe um clube e que vai substiruir o Clube ja  presente no arquivo
+   * Além disso é preciso aumentar o seek para não sobrescrever os dados
+   * @param clubeUsuario
+   * @return
+   */
   public boolean U(Clube clubeUsuario){
     try {
       byte[] data;
@@ -78,7 +91,6 @@ public class CRUD {
       int TAM;
 
       arq = new RandomAccessFile(nomeDoArquivo, "rw");
-
       arq.seek(4);
 
       while(arq.getFilePointer() < arq.length()) {
@@ -106,7 +118,6 @@ public class CRUD {
                       D(clube.getIdClube());
                       arq.close();
                   }
-              
                   return true;
               }
           }
@@ -114,12 +125,16 @@ public class CRUD {
       arq.close();
       return false;
   } catch (Exception e) {
-    System.out.println(e.getMessage());
-    return false;
-  }
+      System.out.println(e.getMessage());
+      return false;
+    }
   }
 
-  //DELETE
+  /**
+   * remove o clube do arquivo
+   * @param id do clube removido
+   * @return
+   */
   public boolean D(int id) {
     try {
         byte[] data;
@@ -156,7 +171,12 @@ public class CRUD {
     }
     
 }
-
+/*---------------------------- UTILITARIOS ------------------------------- */
+/**
+ * faz uma busca no arquivo comparando o id e retnora falso se o no e nao existir
+ * @param id
+ * @return
+ */
   public boolean pesquisaId(int id) {
         try {
             arq = new RandomAccessFile(nomeDoArquivo, "rw");
@@ -191,7 +211,11 @@ public class CRUD {
             return false;
         }
     }
-
+    /**
+     * Mesma coisa do que o pesquisaId mas utiliza o nome como parametro
+     * @param nomeClube
+     * @return retorna o clube desejado utilizado para fazer as partidas
+     */
     public Clube pesquisaNome(String nomeClube) {
       try {
           arq = new RandomAccessFile(nomeDoArquivo, "rw");
@@ -225,6 +249,13 @@ public class CRUD {
   }
 
 
+  /**
+   * partida dos dois clubes e efetua o update dos clubes
+   * @param nomeClube1  nome dos clubes
+   * @param nomeClube2
+   * @param golsClube1 qtds de gols
+   * @param golsClube2
+   */
   public void criarPartida(String nomeClube1, String nomeClube2, int golsClube1, int golsClube2) {
     Clube clube1 = pesquisaNome(nomeClube1);
     Clube clube2 = pesquisaNome(nomeClube2);
@@ -232,6 +263,7 @@ public class CRUD {
     clube1.partidas();
     clube2.partidas();
 
+    // verifica resultado
     if (golsClube1 > golsClube2) {
         clube1.pontos(3);
     } else if (golsClube1 < golsClube2) {

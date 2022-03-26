@@ -9,7 +9,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.DataOutputStream;
 
-//------------------------------FIM IMPORT---------------------------------//t
+//------------------------------FIM IMPORT---------------------------------//
 class Clube{
   protected int idClube;
   protected String nome;
@@ -53,14 +53,25 @@ class Clube{
   public void setPontos(int _pontos){this.pontos = _pontos;}
 
 
+//------------------------------FIM CONSTRUTOR---------------------------------//
+
+/**
+ * metodo para aumentar o numero de partidas de um clube 
+ * */
   public void partidas() {
     this.partidas++;
 }
-
+/**
+ * metodo para aumentar o numero de pontos de um clube 
+ * */
 public void pontos(int x) {
     this.pontos += x;
 }
-
+/**
+ * Método para transformar um objeto em um byte array para ser armazenado no arquivo .db
+ * @return
+ * @throws IOException
+ */
   public byte[] TBA() throws IOException {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     DataOutputStream dos = new DataOutputStream(baos);
@@ -72,7 +83,11 @@ public void pontos(int x) {
     dos.write(pontos);
     return baos.toByteArray();
 }
-
+/**
+ * método para pegar um byte array e transformar ele um um objeto
+ * @param ba parametro que recebe byte array
+ * @throws IOException
+ */
 public void FBA(byte[] ba) throws IOException {
     ByteArrayInputStream bais = new ByteArrayInputStream(ba);
     DataInputStream dis = new DataInputStream(bais);
@@ -84,6 +99,10 @@ public void FBA(byte[] ba) throws IOException {
     pontos = dis.readByte();
 }
 
+/**
+ * Retorna o objeto em forma de string pra ser utilizado em outros metodos
+ * @return
+ */
 public String paraString() {
   return 
     "\nID: " + idClube +

@@ -1,3 +1,8 @@
+/**
+ * Classe menu que faz todas as chamadas de metodos e criaçõo de interface no terminal
+ * @author Breno Lopes
+ * Matrícula: 725777
+ */
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Scanner;
@@ -41,7 +46,10 @@ public class Menu extends Clube {
     System.out.println("Digite a opção desejada");
   }
 
-  // interaçãp da opção 1
+  /**
+   * Menu para interação do usuário para criar um clube
+   * @param id é passado nesse metodo para ser incrementado, se não existir clubes salvos vai ser iniciado com 0
+   */
   public static void op1(int id) {
     CRUD crud = new CRUD();
     Scanner scannerOp1 = new Scanner(System.in);
@@ -60,10 +68,10 @@ public class Menu extends Clube {
     System.out.print("Digite o nome do Clube ->");
     nome = scannerOp1.nextLine();
 
-    System.out.print("Digite o CNPJ do clube ->");
+    System.out.print("Digite o CNPJ do Clube ->");
     cnpj = scannerOp1.nextLine();
 
-    System.out.print("Digite a cidade do clube ->");
+    System.out.print("Digite a cidade do Clube ->");
     cidade = scannerOp1.nextLine();
 
     id = ultimoId(id);
@@ -78,17 +86,24 @@ public class Menu extends Clube {
 
   }
 
-  // interação da opção 2
+  /**
+   * metodo para chamar a lista de clubes
+   * */
   public static void op2() {
     Menu.limpatela();
+    Scanner scannerOp2 = new Scanner(System.in);
     System.out.println("+-------------------------------------------+");
     System.out.println("|        Lista de Clubes                    |");
     System.out.println("+-------------------------------------------+");
     CRUD crud = new CRUD();
     crud.R();
+    System.out.println("Aperte Enter para voltar para o menu...");
+    scannerOp2.nextLine();
   }
 
-  // interação da opção 3
+    /**
+     * metodo para fazer o update de um clube usando o ID dele como referencia
+     */
   public static void op3() {
     Menu.limpatela();
     System.out.println("+-------------------------------------------+");
@@ -107,6 +122,7 @@ public class Menu extends Clube {
     int id;
     id = sc.nextInt();
 
+    //se o clube existir fazemos  upload
     if (crud.pesquisaId(id)) {
       Menu.limpatela();
       System.out.println("+-------------------------------------------+");
@@ -134,7 +150,9 @@ public class Menu extends Clube {
     sc.nextLine();
   }
 
-  // Cabecalho da opção 4
+  /**
+   * Metodo para remover um Clube utilizando o ID dele
+   */
   public static void op4() {
     Menu.limpatela();
     System.out.println("+-------------------------------------------+");
@@ -146,14 +164,19 @@ public class Menu extends Clube {
     System.out.println("Digite o ID do Clube que deseja remover");
     System.out.print("ID escolhido: ");
     int id = sc.nextByte();
-    if (crud.D(id) == true) {
+    if (crud.D(id) != false) { //verificacao
       System.out.println("Clube deletado");
     } else {
       System.out.println("erro");
     }
+    System.out.println("Aperte Enter para voltar para o menu...");
+    sc.nextLine();
+
   }
 
-  // Cabecalho da opção 5
+  /**
+   * Metodo que pega o nome de dois times e a quantidade de gol dos dois times
+   */
   public static void op5() {
     Menu.limpatela();
     System.out.println("+-------------------------------------------+");
@@ -181,8 +204,8 @@ public class Menu extends Clube {
     System.out.print("Digite a quantidade de gols do segundo Clube-> ");
     golsClube2 = sc.nextInt();
 
-    if (crud.pesquisaNome(nomeClube1) != null && crud.pesquisaNome(nomeClube2) != null) {
-      crud.criarPartida(nomeClube1, nomeClube2, golsClube1, golsClube2);
+    if (crud.pesquisaNome(nomeClube1) != null && crud.pesquisaNome(nomeClube2) != null) { //verificacao
+      crud.criarPartida(nomeClube1, nomeClube2, golsClube1, golsClube2); 
     } else {
       System.out.println("erro");
     }
