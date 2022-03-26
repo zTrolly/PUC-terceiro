@@ -20,6 +20,7 @@ public class CRUD {
     }catch(Exception e){System.out.println(e.getMessage());}
   }
 
+//CREATE
 /**
  * Método para criaçõo de um Clube
  */
@@ -27,7 +28,7 @@ public class CRUD {
     byte[] data;
     try {
       arq = new RandomAccessFile(nomeDoArquivo, "rw");
-      data = clubeUsuario.toByteArray();
+      data = clubeUsuario.TBA();
       arq.seek(0);
       arq.writeInt(id);
       arq.seek(arq.length());
@@ -38,27 +39,156 @@ public class CRUD {
     }catch(IOException e){System.out.println(e.getMessage() + "erro de inserção");}
   }
 
+
+  //READ
   public void R() {
     try {
         arq = new RandomAccessFile(nomeDoArquivo, "rw");
-        arq.seek(0);
+        arq.seek(4);
 
-        char lapide;
         byte[] data;
-        int tam;
         Clube clube;
+        char lapide;
+        int TAM;
 
         while (arq.getFilePointer() < arq.length()) {
             lapide = arq.readChar();
-            tam = arq.readInt();
-            data = new byte[tam];
+            TAM = arq.readInt();
+            data = new byte[TAM];
             arq.read(data);
             if (lapide != '*') {
                 clube = new Clube();
-                clube.fromByteArray(data);
-                System.out.println(clube.stringfy());
+                clube.FBA(data);
+                System.out.println(clube.paraString());
             }
         }
-    } catch (Exception e) {System.out.println(e.getMessage());}
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+  }
+
+  //UPDATE
+  public boolean U(Clube clubeUsuario){
+    try {
+      byte[] data;
+      Clube clube;
+      byte[] newData;
+      long posicao;
+      char lapide;
+      int TAM;
+
+      arq = new RandomAccessFile(nomeDoArquivo, "rw");
+
+      arq.seek(4);
+
+      while(arq.getFilePointer() < arq.length()) {
+          posicao = arq.getFilePointer();
+          lapide = arq.readChar();
+          TAM = arq.readInt();
+          data = new byte[TAM];
+
+          arq.read(data);
+
+          if (lapide != '*') {
+              clube = new Clube();
+              clube.FBA(data);
+              if (clube.getIdClube() == clubeUsuario.getIdClube()) {
+                  newData = clubeUsuario.TBA();
+                  if (newData.length <= TAM) {
+                      arq.seek(posicao + 6);
+                      arq.write(newData);
+                      arq.close();
+                  } else {
+                      arq.seek(arq.length());
+                      arq.writeChar(' ');
+                      arq.writeInt(newData.length);
+                      arq.write(newData);
+                      D(clube.getIdClube());
+                      arq.close();
+                  }
+              
+                  return true;
+              }
+          }
+      }
+      arq.close();
+      return false;
+  } catch (Exception e) {
+    System.out.println(e.getMessage());
+    return false;
+  }
+  }
+
+  //DELETE
+  public boolean D(int id) {
+    try {
+        byte[] data;
+        Clube clube;
+        long posicao;
+        char lapide;
+        int TAM;
+
+        arq = new RandomAccessFile(nomeDoArquivo, "rw");
+        arq.seek(4);
+
+        while(arq.getFilePointer() < arq.length()) {
+            posicao = arq.getFilePointer();
+            lapide = arq.readChar();
+            TAM = arq.readInt();
+            data = new byte[TAM];
+            arq.read(data);
+            if(lapide != '*') {
+                clube = new Clube();
+                clube.FBA(data);
+                if(clube.getIdClube() == id) {
+                    arq.seek(posicao);
+                    arq.writeChar('*');
+                    arq.close();
+                    return true;
+                }
+            }
+        }
+        arq.close();
+        return false;
+    } catch(IOException e) {
+        System.out.println(e.getMessage());
+        return false;
+    }
+    
 }
+
+  public boolean pesquisaId(int id) {
+        try {
+            arq = new RandomAccessFile(nomeDoArquivo, "rw");
+
+            byte[] data;
+            Clube objeto;
+            char lapide;
+            int TAM;
+
+            arq.seek(4);
+
+            while (arq.getFilePointer() < arq.length()) {
+                lapide = arq.readChar();
+                TAM = arq.readInt();
+                data = new byte[TAM];
+                arq.read(data);
+
+                if (lapide != '*') {
+                    objeto = new Clube();
+                    objeto.FBA(data);
+
+                    if (objeto.getIdClube() == id) {
+                        System.out.println(objeto);
+                        return true;
+                    }
+                }
+            }
+            return false;
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }
