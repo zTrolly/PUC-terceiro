@@ -15,15 +15,15 @@ class Clube{
   protected String nome;
   protected String cnpj;
   protected String cidade;
-  protected int partidasJogadas;
+  protected int partidas;
   protected int pontos;
 
-  public Clube(int _idClube, String _nome, String _cnpj, String _cidade, int _partidasJogadas, int _pontos){
+  public Clube(int _idClube, String _nome, String _cnpj, String _cidade, int _partidas, int _pontos){
     this.idClube = _idClube;
     this.nome = _nome;
     this.cnpj = _cnpj;
     this.cidade = _cidade;
-    this.partidasJogadas = _partidasJogadas;
+    this.partidas = _partidas;
     this.pontos = _pontos;
   }
 
@@ -32,7 +32,7 @@ class Clube{
     this.nome = "";
     this.cnpj = "";
     this.cidade = "";
-    this.partidasJogadas = 0;
+    this.partidas = 0;
     this.pontos = 0;
   }
 
@@ -41,7 +41,7 @@ class Clube{
   public String getNome(){ return this.nome;}
   public String getCnpj(){ return this.cnpj;}
   public String getCidade(){ return this.cidade;}
-  public int getPartidasJogadas(){return this.partidasJogadas;}
+  public int getPartidas(){return this.partidas;}
   public int getPontos(){return this.pontos;}
 
   //SETS
@@ -49,9 +49,17 @@ class Clube{
   public void setNome(String _nome){this.nome = _nome;}
   public void setCnpj(String _cnpj){this.cnpj = _cnpj;}
   public void setCidade(String _cidade){this.cidade = _cidade;}
-  public void setPartidasJogadas(int _partidasJogadas){this.partidasJogadas = _partidasJogadas;}
+  public void setPartidas(int _partidas){this.partidas = _partidas;}
   public void setPontos(int _pontos){this.pontos = _pontos;}
 
+
+  public void partidas() {
+    this.partidas++;
+}
+
+public void pontos(int x) {
+    this.pontos += x;
+}
 
   public byte[] TBA() throws IOException {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -60,7 +68,7 @@ class Clube{
     dos.writeUTF(nome);
     dos.writeUTF(cnpj);
     dos.writeUTF(cidade);
-    dos.write(partidasJogadas);
+    dos.write(partidas);
     dos.write(pontos);
     return baos.toByteArray();
 }
@@ -72,18 +80,18 @@ public void FBA(byte[] ba) throws IOException {
     nome = dis.readUTF();
     cnpj = dis.readUTF();
     cidade = dis.readUTF();
-    partidasJogadas = dis.readByte();
+    partidas = dis.readByte();
     pontos = dis.readByte();
 }
 
 public String paraString() {
   return 
     "\nID: " + idClube +
-    "\nNome clube: " + nome +
+    "\nClube: " + nome +
     "\nCNPJ: " + cnpj +
     "\nCidade: " + cidade + 
-    "\nPartidas jogadas: " + partidasJogadas + 
-    "\nPontos acumulados: " + pontos;
+    "\nPartidas: " + partidas + 
+    "\nPontos: " + pontos;
 }
 
 }

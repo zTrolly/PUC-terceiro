@@ -179,7 +179,7 @@ public class CRUD {
                     objeto.FBA(data);
 
                     if (objeto.getIdClube() == id) {
-                        System.out.println(objeto);
+                        System.out.println(objeto.paraString());
                         return true;
                     }
                 }
@@ -191,4 +191,59 @@ public class CRUD {
             return false;
         }
     }
+
+    public Clube pesquisaNome(String nomeClube) {
+      try {
+          arq = new RandomAccessFile(nomeDoArquivo, "rw");
+
+          byte[] data;
+          Clube clube;
+          int TAM;
+
+          arq.seek(4);
+
+          while (arq.getFilePointer() < arq.length()) {
+              char lapide = arq.readChar();
+              TAM = arq.readInt();
+              data = new byte[TAM];
+              arq.read(data);
+
+              if (lapide != '*') {
+                  clube = new Clube();
+                  clube.FBA(data);
+                  if (clube.nome.equals(nomeClube)) {
+                      return clube;
+                  }
+              }
+          }
+
+          return null;
+      } catch (IOException e) {
+          System.out.println(e.getMessage());
+          return null;
+      }
+  }
+
+
+  public void criarPartida(String nomeClube1, String nomeClube2, int golsClube1, int golsClube2) {
+    Clube clube1 = pesquisaNome(nomeClube1);
+    Clube clube2 = pesquisaNome(nomeClube2);
+
+    clube1.partidas();
+    clube2.partidas();
+
+    if (golsClube1 > golsClube2) {
+        clube1.pontos(3);
+    } else if (golsClube1 < golsClube2) {
+        clube2.pontos(3);
+    } else {
+        clube1.pontos(1);
+        clube2.pontos(1);
+    }
+    if (U(clube1) && U(clube2)) {
+        System.out.println("\nPartida registrada e dados alterados com sucesso!");
+    } else {
+        System.out.println("\nNão foi possível registrar a partida e/ou alterar os dados!");
+    }
+}
 }

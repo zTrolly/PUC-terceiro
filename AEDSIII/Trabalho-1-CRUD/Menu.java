@@ -12,7 +12,7 @@ public class Menu extends Clube {
       arquivo.close();
       return ultimoId;
     } catch (IOException e) {
-      System.out.println("Erro em ler id");
+      System.out.println("criando novo arquivo");
       return id;
     }
   }
@@ -94,15 +94,17 @@ public class Menu extends Clube {
     System.out.println("+-------------------------------------------+");
     System.out.println("|        Editar um Clube                    |");
     System.out.println("+-------------------------------------------+");
-    int id;
+
     String novoNome;
     String novoCNPJ;
     String novaCidade;
+
     Scanner sc = new Scanner(System.in);
     CRUD crud = new CRUD();
 
     System.out.println("Insira o ID do Clube que deseja modificar: ");
     System.out.print("ID escolhido: ");
+    int id;
     id = sc.nextInt();
 
     if (crud.pesquisaId(id)) {
@@ -110,6 +112,7 @@ public class Menu extends Clube {
       System.out.println("+-------------------------------------------+");
       System.out.println("|        Novos dados do Clube               |");
       System.out.println("+-------------------------------------------+");
+      sc.nextLine();
       System.out.print("Digite o novo nome-> ");
       novoNome = sc.nextLine();
       System.out.print("Digite o novo CNPJ-> ");
@@ -117,10 +120,9 @@ public class Menu extends Clube {
       System.out.print("Digite a nova Cidade-> ");
       novaCidade = sc.nextLine();
 
-      Clube cUpd = new Clube(id, novoNome, novoCNPJ, novaCidade, 0, 0);
-      
+      Clube novoClube = new Clube(id, novoNome, novoCNPJ, novaCidade, 0, 0);
 
-      if (crud.U(cUpd)) {
+      if (crud.U(novoClube)) {
         System.out.println("Clube alterado");
       } else {
         System.out.println("erro");
@@ -142,11 +144,12 @@ public class Menu extends Clube {
     Scanner sc = new Scanner(System.in);
 
     System.out.println("Digite o ID do Clube que deseja remover");
-    byte idDel = sc.nextByte();
-    if (crud.D(idDel) == true) {
-      System.out.println("Time deletado com sucesso!");
+    System.out.print("ID escolhido: ");
+    int id = sc.nextByte();
+    if (crud.D(id) == true) {
+      System.out.println("Clube deletado");
     } else {
-      System.out.println("Time não foi encontrado!");
+      System.out.println("erro");
     }
   }
 
@@ -156,6 +159,33 @@ public class Menu extends Clube {
     System.out.println("+-------------------------------------------+");
     System.out.println("|        Criar uma Partida                  |");
     System.out.println("+-------------------------------------------+");
+
+    CRUD crud = new CRUD();
+    Scanner sc = new Scanner(System.in);
+
+    String nomeClube1;
+    String nomeClube2;
+    int golsClube1;
+    int golsClube2;
+
+    sc.nextLine();
+
+    System.out.println("Digite o nome primeiro Clube-> ");
+    nomeClube1 = sc.nextLine();
+    System.out.print("Digite a quantidade de gols do primeiro Clube-> ");
+    golsClube1 = sc.nextInt();
+
+    sc.nextLine();
+    System.out.println("Digite o nome segundo Clube-> ");
+    nomeClube2 = sc.nextLine();
+    System.out.print("Digite a quantidade de gols do segundo Clube-> ");
+    golsClube2 = sc.nextInt();
+
+    if (crud.pesquisaNome(nomeClube1) != null && crud.pesquisaNome(nomeClube2) != null) {
+      crud.criarPartida(nomeClube1, nomeClube2, golsClube1, golsClube2);
+    } else {
+      System.out.println("erro");
+    }
   }
 
 }
