@@ -273,9 +273,9 @@ public class CRUD {
         clube2.pontos(1);
     }
     if (U(clube1) && U(clube2)) {
-        System.out.println("\nPartida registrada e dados alterados com sucesso!");
+        System.out.println("Partida executada, os pontos foram acrescentados nos dois times");
     } else {
-        System.out.println("\nNão foi possível registrar a partida e/ou alterar os dados!");
+        System.out.println("erro");
     }
 }
 }
