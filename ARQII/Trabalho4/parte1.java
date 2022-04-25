@@ -50,11 +50,18 @@ class Text {
         return "" + x + y + w;
     }
 
-    
+
 }
 
 public class parte1 {
 
+
+/**
+ * 
+ * @param s -> Linha do arquivo que vai ser lido
+ * @param base -> Objeto text que recebe a string s
+ * @return -> objeto tratado
+ */
     public static Text input(String s, Text base) {
         if (testInput(s)) {
             switch (s.charAt(0)) {
@@ -70,6 +77,8 @@ public class parte1 {
                     break;
                 case 'W':
                     base.setW(treatW(s.substring(2)));
+                    //escrever no arquivo o base.merge();
+                    //TODO
                     break;
                 default:
                     break;
@@ -80,6 +89,11 @@ public class parte1 {
     }
 
 
+    /**
+     * 
+     * @param s -> string "crua"
+     * @return
+     */
     // Funcao para conferir um input
     public static boolean testInput(String s) {
         // confere se o tamanho minimo do input estah correto
@@ -168,6 +182,7 @@ public class parte1 {
     }
 
 
+
     public static void main(String[] args) {
         Text base = new Text();
         Scanner scan = new Scanner(System.in);
@@ -184,6 +199,9 @@ public class parte1 {
             base = input(s, base);
             System.out.println(base.merge());
         } while (scan.next() != "fim.");
+        
+        
+
 
 
 

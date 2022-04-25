@@ -57,9 +57,6 @@ class teste {
       x = linha.charAt(2);
     else if(linha.charAt(0) == 'Y')
       y = linha.charAt(2);
-    else
-      w = "oidfds";
-
   }
   
   //metodo de leitura de arquivo
