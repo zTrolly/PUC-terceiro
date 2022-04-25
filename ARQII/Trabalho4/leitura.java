@@ -66,13 +66,14 @@ public class leitura {
         return tmp;
     }
 
-    void lerLinha() throws Exception{
+    static void lerArquivo() throws Exception{
         BufferedReader br = new BufferedReader(new FileReader("testeula.ula"));
         String linha = "";
         char x = ' ', y = ' ';
         String tmp = ""; 
-        while(linha != "fim."){
+        while(linha != null && !linha.equals("fim.") && !linha.equals("inicio:")){
             linha = br.readLine();
+            
             if(linha.charAt(0) == 'X' ){
                 x = linha.charAt(2);       
             } else if(linha.charAt(0) == 'Y'){
@@ -80,8 +81,8 @@ public class leitura {
             } else if(linha.charAt(0) == 'W'){
                 tmp = linha;
                 tmp.substring(2, tmp.length()-1);
-                String w = OperacaoW(tmp);
-                printarOperação(x,y,w);
+                char w = OperacaoW(tmp);
+                printarOperacao(x,y,w);
             }
             
         }
@@ -90,23 +91,24 @@ public class leitura {
 
     }
 
-    private void printarOperação(char x, char y, String w) throws Exception {
-        FileWriter d = new FileWriter("testeula.hex");
+    private static void printarOperacao(char x, char y, char w) throws Exception {
+        FileWriter d = new FileWriter("testeula2.hex");
         BufferedWriter bw = new BufferedWriter(d);
         String linha = "";
         String x1 = String.valueOf(x);
         linha.concat(x1);
         String y1 = String.valueOf(y);
         linha.concat(y1);
-        linha.concat(w);
+        String w1 = String.valueOf(w);
+        linha.concat(w1);
         bw.write(linha);
-
+        System.out.println(linha);
         bw.close();
     }
 
     public static void main(String[] args) throws Exception {
         
-        lerLinha();
+        lerArquivo();
 
     }
 }
