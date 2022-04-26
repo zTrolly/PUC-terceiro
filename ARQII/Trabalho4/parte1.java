@@ -77,7 +77,7 @@ RandomAccessFile arquivo;
                 case 'W':
                     base.setW(treatW(s.substring(2)));
                     RandomAccessFile arquivo;
-                    arquivo = new RandomAccessFile("testeula.hex", "w");
+                    arquivo = new RandomAccessFile("testeula.hex", "rw");
                     arquivo.writeBytes(base.merge());
                     arquivo.close();
                     //escrever no arquivo o base.merge();
