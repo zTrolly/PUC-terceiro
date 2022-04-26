@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 //Classe para gravar as instrucoes
 class Text {
-    private RandomAccessFile arq;
-    private final String fileName = "testeula.hex";
     private char x;
     private char y;
     private char w;
@@ -55,14 +53,15 @@ class Text {
 
 public class parte1 {
 
-
+RandomAccessFile arquivo;
 /**
  * 
  * @param s -> Linha do arquivo que vai ser lido
  * @param base -> Objeto text que recebe a string s
  * @return -> objeto tratado
+ * @throws IOException
  */
-    public static Text input(String s, Text base) {
+    public static Text input(String s, Text base) throws IOException {
         if (testInput(s)) {
             switch (s.charAt(0)) {
                 case 'X':
@@ -77,6 +76,10 @@ public class parte1 {
                     break;
                 case 'W':
                     base.setW(treatW(s.substring(2)));
+                    RandomAccessFile arquivo;
+                    arquivo = new RandomAccessFile("testeula.hex", "w");
+                    arquivo.writeBytes(base.merge());
+                    arquivo.close();
                     //escrever no arquivo o base.merge();
                     //TODO
                     break;
@@ -182,11 +185,9 @@ public class parte1 {
     }
 
 
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Text base = new Text();
         Scanner scan = new Scanner(System.in);
-
 
         String s = scan.nextLine();
         while(s != "inicio:"){
@@ -200,7 +201,7 @@ public class parte1 {
             System.out.println(base.merge());
         } while (scan.next() != "fim.");
         
-        
+        scan.close();
 
 
 
