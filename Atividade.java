@@ -16,16 +16,6 @@ class Atividade{
         private String cidade;
         private String uf;
 
-
-        public Pessoa(String nome, String endereco, String telefone, String cep, String cidade, String uf){
-            this.nome = nome;
-            this.endereco = endereco;
-            this.telefone = telefone;
-            this.cep = cep;
-            this.cidade = cidade;
-            this.uf = uf;
-        }
-
         //getters
         public String getNome(){return this.nome;}
         public String getEndereco(){return this.endereco;}
@@ -41,6 +31,16 @@ class Atividade{
         public void setCep(String cep){this.cep = cep;}
         public void setCidade(String cidade){this.cidade = cidade;}
         public void setUf(String uf){this.uf = uf;}
+
+
+        public Pessoa(String nome, String endereco, String telefone, String cep, String cidade, String uf) {
+            this.setNome(nome);
+            this.setEndereco(endereco);
+            this.setTelefone(telefone);
+            this.setCep(cep);
+            this.setCidade(cidade);
+            this.setUf(uf);
+        }
     }
 
     class PessoaJuridica extends Pessoa{
@@ -93,4 +93,12 @@ class Atividade{
 
 
     }
+
+    class Cliente{
+
+    }
+
+    class Funcionario{}
+    
+    class Empresa{}
 }
