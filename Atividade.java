@@ -1,6 +1,14 @@
 class Atividade{
 
     abstract class Pessoa{
+        /**
+         * @param nome
+         * @param endereco
+         * @param telefone
+         * @param cep
+         * @param cidade
+         * @param uf
+         */
         private String nome;
         private String endereco;
         private String telefone;
@@ -57,6 +65,31 @@ class Atividade{
         
         //set
         public void setCnpj(long cnpj){this.cnpj = cnpj;}
+
+
+    }
+
+    class PessoaFisica extends Pessoa{
+
+        /**
+         * @param nome
+         * @param endereco
+         * @param telefone
+         * @param cep
+         * @param cidade
+         * @param uf
+         */
+        private long cpf;
+        public PessoaFisica(String nome, String endereco, String telefone, String cep, String cidade, String uf, long cpf) {
+            super(nome, endereco, telefone, cep, cidade, uf);
+            this.cpf = cpf;
+        }
+        
+        //get
+        public long getCpf(){return this.cpf;}
+        
+        //set
+        public void setCpf(long cpf){this.cpf = cpf;}
 
 
     }
