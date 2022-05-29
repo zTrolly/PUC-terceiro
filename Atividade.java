@@ -1,3 +1,7 @@
+/**
+ * @author Breno Lopes - 725777
+ * @version 1.0.0
+ */
 class Atividade {
 
     abstract class Pessoa {
