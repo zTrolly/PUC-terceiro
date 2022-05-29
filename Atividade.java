@@ -139,6 +139,11 @@ class Atividade {
     }
 
     class Cliente {
+        /**
+         * @param pessoa
+         * @param limiteDeCredito
+         */
+
         private Pessoa pessoa;
         private float limiteDeCredito;
 
@@ -176,6 +181,11 @@ class Atividade {
     }
 
     class Funcionario {
+        /**
+         * @param funcionario
+         * @param cargo
+         * @param salario
+         */
         private PessoaFisica funcionario;
         private String cargo;
         private float salario;
@@ -232,6 +242,11 @@ class Atividade {
     }
     
     class Empresa {
+        /**
+         * @param listaClientes
+         * @param listaFuncionarios
+         * @param presidente
+         */
         private Cliente[] listaClientes;
         private Funcionario[] listaFuncionarios;
         private Funcionario presidente;
