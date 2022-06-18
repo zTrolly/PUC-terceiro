@@ -1,0 +1,20 @@
+
+.text 
+
+.globl main
+
+main:
+# a = $s0
+# b = $s1
+# c = $s2
+
+addi $s0, $zero, 10
+addi $s1, $zero, -1
+addi $s0,$s0,1
+add $s3,$s0,$s1
+
+
+
+
+
+
