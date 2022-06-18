@@ -1,0 +1,17 @@
+
+.text 
+
+.globl main
+
+main:
+# x = $s0
+# y = $s1
+
+addi $s0, $zero, 3
+sra  $s1, $s0, 2
+
+
+
+
+
+
