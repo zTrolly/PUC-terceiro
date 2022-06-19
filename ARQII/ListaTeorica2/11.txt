@@ -1,0 +1,21 @@
+.text
+.globl main
+
+# j -> $s0
+# i -> $s1
+
+main:
+addi $s0, $zero, 0
+addi $s1, $zero, 10
+
+test:
+slt $t0, $s0, $s1 # if j < 1 t0 = 1
+bne  $t0, $0,loop # if t0 != 0 goto loop
+j exit
+
+loop:
+addi $s0,$s0,1
+j test
+
+exit:
+
