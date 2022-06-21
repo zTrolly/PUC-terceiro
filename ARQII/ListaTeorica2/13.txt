@@ -1,0 +1,29 @@
+.text 
+.globl main
+
+# $s0 -> temp
+
+main:
+
+ori $t0, $zero, 0x1001
+sll $t0, $t0, 16 #t0 = 0x10010000
+
+lw $s0,0($t0) #temp[0]
+
+ori $t1,$zero, 1 # t1 = 1
+
+slti $t1, $s0, 51 # if temp <= t1 = 1
+
+bne $t1, $zero, check50
+sw $zero,4($t0)
+
+check50:
+slti $t1, $s0, 30 # if temp < 30 t1 = 1
+beq $t1,$zero, flag
+sw $zero, 4($t0)
+j fim
+
+flag: 
+ori $t2, $zero, 1
+sw $t2,4($t0)
+fim:
